@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>rufetin gelme vaxti</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f4f8;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+  }
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  #days {
+    font-size: 4rem;
+    color: #007acc;
+    margin-bottom: 0.5rem;
+  }
+  p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+</style>
+</head>
+<body>
+  <h1>rufetin gelme vaxti</h1>
+  <div id="days">...</div>
+  <p>дней осталось до 1 октября</p>
+
+  <script>
+    function calculateDays() {
+      const now = new Date();
+      const year = now.getMonth() > 9 ? now.getFullYear() + 1 : now.getFullYear();
+      const targetDate = new Date(year, 9, 1); // 1 октября (месяцы с 0)
+      const diffTime = targetDate - now;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      return diffDays >= 0 ? diffDays : 0;
+    }
+
+    function updateDays() {
+      const daysElem = document.getElementById('days');
+      daysElem.textContent = calculateDays();
+    }
+
+    updateDays();
+    // Обновлять каждый час, если страница долго открыта
+    setInterval(updateDays, 3600000);
+  </script>
+</body>
+</html>
